@@ -8,7 +8,7 @@ fi
 NTRIALS="$1"
 
 ROOT=`pwd`
-if [ -d Midje ]
+if [ -d Midje/.git ]
 then
     echo "Skipping getting of Midje from github, since it appears you already have it."
 else

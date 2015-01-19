@@ -8,7 +8,7 @@ fi
 NTRIALS="$1"
 
 ROOT=`pwd`
-if [ -d clojure ]
+if [ -d clojure/.git ]
 then
     echo "Skipping getting of Clojure from github, since it appears you already have it."
 else
