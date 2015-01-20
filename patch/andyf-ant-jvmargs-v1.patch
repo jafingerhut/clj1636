@@ -1,5 +1,5 @@
 diff --git a/build.xml b/build.xml
-index 186b666..11a98b6 100644
+index 186b666..df98bdb 100644
 --- a/build.xml
 +++ b/build.xml
 @@ -53,6 +53,12 @@
@@ -8,10 +8,10 @@ index 186b666..11a98b6 100644
        <sysproperty key="java.awt.headless" value="true"/>
 +      <!-- Found these options in the instructions for JITwatch, here: -->
 +      <!-- https://github.com/AdoptOpenJDK/jitwatch/wiki/Instructions -->
-+      <!-- <jvmarg value="-XX:+UnlockDiagnosticVMOptions"/> -->
-+      <!-- <jvmarg value="-XX:+TraceClassLoading"/> -->
-+      <!-- <jvmarg value="-XX:+LogCompilation"/> -->
-+      <!-- <jvmarg value="-XX:+PrintAssembly"/> -->
++      <jvmarg value="-XX:+UnlockDiagnosticVMOptions"/>
++      <jvmarg value="-XX:+TraceClassLoading"/>
++      <jvmarg value="-XX:+LogCompilation"/>
++      <jvmarg value="-XX:+PrintAssembly"/>
        <arg value="clojure.core"/>
        <arg value="clojure.core.protocols"/>
        <arg value="clojure.main"/>
