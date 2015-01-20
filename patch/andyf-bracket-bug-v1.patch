@@ -1,0 +1,48 @@
+diff --git a/src/clj/clojure/core_deftype.clj b/src/clj/clojure/core_deftype.clj
+index 97e14cc..6207c1c 100644
+--- a/src/clj/clojure/core_deftype.clj
++++ b/src/clj/clojure/core_deftype.clj
+@@ -50,9 +50,33 @@
+              (drop-while seq? (next s)))
+       ret)))
+ 
++(def impls-stats (atom {:count 0,
++                        :total 0,
++                        :minimum Long/MAX_VALUE,
++                        :maximum Long/MIN_VALUE}))
++
++(defn update-stats [stats n]
++  (let [{:keys [count total minimum maximum]} stats]
++    {:count (inc count)
++     :total (+ total n)
++     :minimum (min minimum n)
++     :maximum (max maximum n)}))
++
+ (defn- parse-opts+specs [opts+specs]
+   (let [[opts specs] (parse-opts opts+specs)
+         impls (parse-impls specs)
++        _ (let [nimpls (count impls)
++                _ (swap! impls-stats update-stats nimpls)
++                x @impls-stats]
++            (println (format "bug1636: nimpls=%d count=%s total=%s min=%s max=%s avg=%s"
++                             nimpls
++                             (:count x)
++                             (:total x)
++                             (:minimum x)
++                             (:maximum x)
++                             (/ (* 1.0 (:total x)) (:count x))))
++;;            (println (format "bug1636: long impls=%s" impls))
++            )
+         interfaces (-> (map #(if (var? (resolve %)) 
+                                (:on (deref (resolve %)))
+                                %)
+@@ -60,6 +84,9 @@
+                        set
+                        (disj 'Object 'java.lang.Object)
+                        vec)
++        _ (when (and (empty? impls) (not (empty? interfaces)))
++            (println (format "bug1636: impls='%s' interfaces='%s'"
++                             impls interfaces)))
+         methods (map (fn [[name params & body]]
+                        (cons name (maybe-destructured params body)))
+                      (apply concat (vals impls)))]
