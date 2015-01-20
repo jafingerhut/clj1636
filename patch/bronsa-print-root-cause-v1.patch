@@ -1,0 +1,15 @@
+diff --git a/src/jvm/clojure/lang/SeqIterator.java b/src/jvm/clojure/lang/SeqIterator.java
+index e6ad481..7b6a393 100644
+--- a/src/jvm/clojure/lang/SeqIterator.java
++++ b/src/jvm/clojure/lang/SeqIterator.java
+@@ -39,6 +39,10 @@ public boolean hasNext(){
+ 		}
+ 	else if(seq == next)
+ 		next = RT.next(seq);
++	else if (RT.seq(next) == null)
++		System.out.println("this shouldn't happen: " + (this == seq));
++	if (RT.seq(next) == null && next != null)
++		System.out.println("bug: " + next);
+ 	return next != null;
+ }
+ 
