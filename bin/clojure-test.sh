@@ -16,4 +16,5 @@ else
 fi
 cd clojure
 git checkout clojure-1.7.0-alpha5
+git diff .
 ${ROOT}/bin/repeat.sh ${NTRIALS} ${ROOT}/bin/clojure-1trial.sh

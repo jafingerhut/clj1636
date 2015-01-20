@@ -16,4 +16,5 @@ else
 fi
 cd Midje
 git checkout e98cf87
+git diff .
 ${ROOT}/bin/repeat.sh ${NTRIALS} ${ROOT}/bin/midje-1trial.sh

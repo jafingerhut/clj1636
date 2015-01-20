@@ -43,6 +43,7 @@ ubuntu)
 esac
 java -version
 mvn -version
+ant -version
 lein version
 set +x
 

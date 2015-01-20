@@ -17,6 +17,7 @@ fi
 cd clojure
 # Get the first version with the fix for CLJ-1636
 git checkout f437b853adeaffc5cad9bb1e01e2355357a492c9
+git diff .
 # Built it and install it locally.  It will be called
 # clojure-1.7.0-master-SNAPSHOT in your local Maven repo
 mvn install
@@ -30,6 +31,7 @@ else
 fi
 cd Midje
 git checkout e98cf87
+git diff .
 # Copy over a project.clj that is nearly the same, except it uses
 # Clojure 1.7.0-master-SNAPSHOT for the profile named 1.7 instead of
 # 1.7.0-alpha5
